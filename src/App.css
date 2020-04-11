@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: lightyellow
+}
+
+div.fl.w-50 {
+  align-items: center;
+  height: 50vh;
+  padding: 50px;
+}
+
+p.f1 {
+  margin: 0 auto 20px;
+}

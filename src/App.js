@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      number: '',
+      trivia: ''
+    }
+  }
+
+  componentDidMount() {
+    fetch('http://numbersapi.com/random/trivia?json')
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({ number: data.number })
+      this.setState({ trivia: data.text })
+    })
+  }
+
+  render() {
+    const { number, trivia } = this.state;
+    return number === '' ?
+    (
+      <div>
+        <h1 className='tc f1 b blue'>Number Trivia!</h1>
+        <p className='tc f2 blue'>Loading....</p>
+      </div> 
+
+    ) : (
+
+      <div>
+        <h1 className='tc f1 b blue'>Number Trivia!</h1>
+        <p className='tc f2 blue'>{number}</p>
+        <p className='tc f4 blue'>{trivia}</p>
+      </div>
+    )
+  }
 }
 
 export default App;
