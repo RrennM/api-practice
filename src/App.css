@@ -41,12 +41,11 @@ body {
   background-color: lightyellow
 }
 
-div.fl.w-50 {
-  align-items: center;
-  height: 50vh;
+div.infoBox {
+  height: 40vh;
   padding: 50px;
 }
 
-p.f1 {
+p.f2 {
   margin: 0 auto 20px;
 }
