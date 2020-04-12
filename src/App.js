@@ -7,29 +7,26 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      number: '',
-      trivia: ''
+      advice: ''
     }
   }
 
   componentDidMount() {
-    fetch('http://numbersapi.com/random/trivia?json')
+    fetch('https://api.adviceslip.com/advice')
     .then(resp => resp.json())
     .then(data => {
-      this.setState({ number: data.number })
-      this.setState({ trivia: data.text })
+      console.log(data.slip.advice);
+      this.setState({ advice: data.slip.advice })
     })
   }
 
   onButtonClick= () => {
-    this.setState({ number: 'Loading...' })
-    this.setState({ trivia: '' })
+    this.setState({ advice: 'Loading...' })
 
-    fetch('http://numbersapi.com/random/trivia?json')
+    fetch('https://api.adviceslip.com/advice')
     .then(resp => resp.json())
     .then(data => {
-      this.setState({ number: data.number })
-      this.setState({ trivia: data.text })
+      this.setState({ advice: data.slip.advice })
     })
   }
 
@@ -38,11 +35,11 @@ class App extends Component {
   }
 
   render() {
-    const { number, trivia } = this.state;
-    return number === '' ?
+    const { advice } = this.state;
+    return advice === '' ?
     (
       <div>
-        <h1 className='tc f1 b blue'>Number Trivia!</h1>
+        <h1 className='tc f1 b blue'>Random Advice!</h1>
         <div className="infoBox">
           <p className='tc f2 blue'>Loading....</p>
         </div>
@@ -53,10 +50,9 @@ class App extends Component {
     ) : (
 
       <div>
-        <h1 className='tc f1 b blue'>Number Trivia!</h1>
+        <h1 className='tc f1 b blue'>Random Advice!</h1>
         <div className="infoBox">
-          <p className='tc f2 blue'>{number}</p>
-          <p className='tc f4 blue'>{trivia}</p>
+          <p className='tc f2 blue'>{advice}</p>
         </div>
         <RefreshButton buttonClick={this.onButtonClick} className='tc'/>
         <p className="tc f6 blue">Warning: This may take a few moments to complete.</p>
