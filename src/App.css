@@ -42,7 +42,7 @@ body {
 }
 
 div.infoBox {
-  height: 40vh;
+  min-height: 30vh;
   padding: 50px;
 }
 
