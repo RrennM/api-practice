@@ -15,7 +15,6 @@ class App extends Component {
     fetch('https://api.adviceslip.com/advice')
     .then(resp => resp.json())
     .then(data => {
-      console.log(data.slip.advice);
       this.setState({ advice: data.slip.advice })
     })
   }
@@ -36,28 +35,19 @@ class App extends Component {
 
   render() {
     const { advice } = this.state;
-    return advice === '' ?
-    (
+    return (
       <div>
         <h1 className='tc f1 b blue'>Random Advice!</h1>
         <div className="infoBox">
-          <p className='tc f2 blue'>Loading....</p>
+          {advice === '' 
+          ? <p className='tc f2 blue'>Loading....</p>
+          : <p className='tc f2 blue'>{advice}</p>}
         </div>
         <RefreshButton buttonClick={this.onButtonClick} className='tc'/>
         <p className="tc f6 blue">Warning: This may take a few moments to complete.</p>
       </div> 
 
-    ) : (
-
-      <div>
-        <h1 className='tc f1 b blue'>Random Advice!</h1>
-        <div className="infoBox">
-          <p className='tc f2 blue'>{advice}</p>
-        </div>
-        <RefreshButton buttonClick={this.onButtonClick} className='tc'/>
-        <p className="tc f6 blue">Warning: This may take a few moments to complete.</p>
-      </div>
-    )
+    ) 
   }
 }
 
